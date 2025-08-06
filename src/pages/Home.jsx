@@ -45,22 +45,66 @@ const Home = () => {
     });
   };
 
+  // 获取特色文章（假设前3篇为特色文章）
+  const featuredPosts = posts.slice(0, 3);
+
   return (
-      <div className="page-container">
- 
-        <div className="home-container">
-          <div className="left-column">
-            <nav className="left-menu">
-              <ul>
-                <li><Link to="/">首页</Link></li>
-                <li><Link to="/archive">文章归档</Link></li>
-                <li><Link to="/categories">分类</Link></li>
-                <li><Link to="/tags">标签</Link></li>
-                <li><Link to="/about">关于我</Link></li>
-              </ul>
-            </nav>
+    <div className="page-container">
+      {/* 顶部导航栏 */}
+      <header className="site-header">
+        <div className="container header-content">
+          <div className="logo-container">
+            <Link to="/" className="logo">
+              <h1>我的博客</h1>
+            </Link>
           </div>
-          <div className="main-content">
+          <nav className="main-navigation">
+            <ul className="nav-menu">
+              <li><Link to="/">首页</Link></li>
+              <li><Link to="/categories/programming">编程</Link></li>
+              <li><Link to="/categories/ai">AI & 机器学习</Link></li>
+              <li><Link to="/categories/web">Web开发</Link></li>
+              <li><Link to="/about">关于</Link></li>
+            </ul>
+          </nav>
+          <div className="mobile-menu-toggle">
+            <button className="menu-toggle-btn">
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main className="site-main">
+        <div className="container">
+          {/* 特色文章区域 */}
+          <section className="featured-posts">
+            <h2 className="section-title">特色文章</h2>
+            <div className="featured-posts-container">
+              {featuredPosts.map((post) => (
+                <article key={post.id} className="featured-post">
+                  <div className="featured-post-content">
+                    <div className="post-meta">
+                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                      {post.tags && post.tags.length > 0 && (
+                        <span className="tag">{post.tags[0]}</span>
+                      )}
+                    </div>
+                    <h3 className="post-title">
+                      <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                    </h3>
+                    <p className="post-description">{post.description}</p>
+                    <Link to={`/posts/${post.id}`} className="read-more">阅读全文</Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          {/* 搜索区域 */}
+          <section className="search-section">
             <div className="search-container">
               <input
                 type="text"
@@ -70,63 +114,64 @@ const Home = () => {
                 className="search-input"
               />
             </div>
+          </section>
 
+          {/* 最新文章区域 */}
+          <section className="latest-posts">
+            <h2 className="section-title">{searchQuery ? `搜索结果: ${searchQuery}` : '最新博客文章'}</h2>
             <div className="posts-list">
-              <h2>{searchQuery ? `搜索结果: ${searchQuery}` : '最新博客文章'}</h2>
-
               {filteredPosts.length === 0 ? (
                 <p className="no-posts">没有找到匹配的文章</p>
               ) : (
-                <ul className="post-items">
+                <div className="post-grid">
                   {filteredPosts.map((post) => (
-                    <li key={post.id} className="post-item">
-                      <Link to={`/posts/${post.id}`} className="post-link">
-                        <h3 className="post-title">{post.title}</h3>
-                      </Link>
-                      <div className="post-meta">
-                        <time dateTime={post.date}>{formatDate(post.date)}</time>
-                        <span className="reading-time">· {post.readingTime} 分钟阅读</span>
-                        {post.tags && post.tags.length > 0 && (
-                          <div className="post-tags">
-                            {post.tags.map(tag => (
-                              <span key={tag} className="tag">{tag}</span>
-                            ))}
-                          </div>
-                        )}
+                    <article key={post.id} className="post-card">
+                      <div className="post-card-content">
+                        <div className="post-meta">
+                          <time dateTime={post.date}>{formatDate(post.date)}</time>
+                          {post.tags && post.tags.length > 0 && (
+                            <span className="tag">{post.tags[0]}</span>
+                          )}
+                        </div>
+                        <h3 className="post-title">
+                          <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                        </h3>
+                        <p className="post-description">{post.description}</p>
+                        <div className="post-footer">
+                          <Link to={`/posts/${post.id}`} className="read-more">阅读全文 →</Link>
+                        </div>
                       </div>
-                      <p className="post-description">{post.description}</p>
-                      <Link
-                        to={`/posts/${post.id}`}
-                        className="read-more-link"
-                      >
-                        阅读全文 →
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-          <div className="right-column">
-            <aside className="sidebar">
-              <div className="tag-cloud">
-                <h3>文章标签</h3>
-                <div className="tags">
-                  {Array.from(new Set(posts.flatMap(post => post.tags || []))).map(tag => (
-                    <span key={tag} className="tag">{tag}</span>
+                    </article>
                   ))}
                 </div>
-              </div>
-            </aside>
-          </div>
+              )}
+            </div>
+          </section>
         </div>
-        <footer className="site-footer">
-          <div className="footer-content">
+      </main>
+
+      {/* 页脚 */}
+      <footer className="site-footer">
+        <div className="container footer-content">
+          <div className="footer-logo">
+            <Link to="/" className="logo">我的博客</Link>
+          </div>
+          <div className="footer-nav">
+            <ul className="footer-menu">
+              <li><Link to="/">首页</Link></li>
+              <li><Link to="/categories/programming">编程</Link></li>
+              <li><Link to="/categories/ai">AI & 机器学习</Link></li>
+              <li><Link to="/categories/web">Web开发</Link></li>
+              <li><Link to="/about">关于</Link></li>
+            </ul>
+          </div>
+          <div className="footer-copyright">
             <p>&copy; {new Date().getFullYear()} 我的博客. 保留所有权利.</p>
           </div>
-        </footer>
-      </div>
-    );
-  };
+        </div>
+      </footer>
+    </div>
+  );
+};
 
 export default Home;

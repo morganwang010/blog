@@ -1,0 +1,87 @@
+name: Deploy React App to VPS
+
+# 触发条件：当推送到main分支时执行
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    # 步骤1：拉取代码仓库
+    - uses: actions/checkout@v3
+    
+    # 步骤2：设置Node.js环境
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: 'npm'
+    
+    # 步骤3：安装依赖并构建项目
+    - name: Install dependencies and build
+      run: |
+        npm ci
+        npm run build
+    
+    # 步骤4：通过SSH连接到VPS并部署
+    - name: Deploy to VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        # 执行部署命令
+        script: |
+          # 进入部署目录（根据你的实际情况修改）
+          cd /var/www/react-app
+          
+          # 拉取最新代码（如果VPS上有仓库）
+          # git pull origin main
+          
+          # 创建备份（可选）
+          timestamp=$(date +%Y%m%d%H%M%S)
+          if [ -d "build" ]; then
+            mv build build_$timestamp
+          fi
+          
+          # 创建临时目录接收构建文件
+          mkdir -p temp_build
+          
+          # 退出SSH连接，准备传输文件
+          exit
+          
+    # 步骤5：将构建产物传输到VPS
+    - name: Transfer build files to VPS
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        password: ${{ secrets.VPS_PASSWORD }}
+        source: "build/*"
+        target: "/var/www/react-app/temp_build"
+    
+    # 步骤6：完成部署并清理
+    - name: Finalize deployment
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        script: |
+          cd /var/www/react-app
+          
+          # 替换旧版本
+          rm -rf build
+          mv temp_build build
+          
+          # 设置正确的文件权限
+          chmod -R 755 build
+          
+          # 如果使用Nginx，重启服务（可选）
+          # sudo systemctl restart nginx
+          
+          # 清理备份（保留最近5个备份）
+          ls -dt build_* | tail -n +6 | xargs -I {} rm -rf {}
