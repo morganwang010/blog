@@ -3,7 +3,7 @@ name: Deploy React App to VPS
 # 触发条件：当推送到main分支时执行
 on:
   push:
-    branches: [ main ]
+    branches: [ master, main ]
 
 jobs:
   build-and-deploy:
