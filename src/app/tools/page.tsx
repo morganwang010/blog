@@ -45,8 +45,16 @@ const AppCard = ({
   </div>
 );
 
+type AppItem = {
+  title: string;
+  desc: string;
+  tag?: 'HOT' | 'NEW';
+  iconColor: string;
+  iconEmoji: string;
+};
+
 export default function ToolsPage() {
-  const apps = [
+  const apps: AppItem[] = [
     {
       title: '最新注册域名',
       desc: '查询新注册域名',
@@ -117,8 +125,8 @@ export default function ToolsPage() {
       <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-lg p-8">
         <h2 className="text-3xl font-bold text-gray-800 mb-8">热门应用</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-          {apps.map((app, index) => (
-            <AppCard key={index} {...app} />
+          {apps.map((app) => (
+            <AppCard key={app.title} {...app} />
           ))}
         </div>
       </div>
