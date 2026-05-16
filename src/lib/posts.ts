@@ -77,3 +77,33 @@ export function extractHeadings(content: string): { id: string; text: string; le
 
   return headings;
 }
+
+export function searchPosts(posts: Post[], query: string): Post[] {
+  if (!query.trim()) return posts;
+  const lowerQuery = query.toLowerCase();
+  return posts.filter((post) => {
+    const titleMatch = post.frontmatter.title.toLowerCase().includes(lowerQuery);
+    const descMatch = post.frontmatter.description.toLowerCase().includes(lowerQuery);
+    const tagsMatch = post.frontmatter.tags.some((tag) => tag.toLowerCase().includes(lowerQuery));
+    return titleMatch || descMatch || tagsMatch;
+  });
+}
+
+export function paginatePosts<T>(items: T[], page: number, pageSize: number): {
+  items: T[];
+  totalPages: number;
+  totalItems: number;
+  currentPage: number;
+} {
+  const totalItems = items.length;
+  const totalPages = Math.ceil(totalItems / pageSize);
+  const validPage = Math.min(Math.max(1, page), totalPages || 1);
+  const startIndex = (validPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  return {
+    items: items.slice(startIndex, endIndex),
+    totalPages,
+    totalItems,
+    currentPage: validPage,
+  };
+}
