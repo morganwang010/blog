@@ -1,14 +1,16 @@
 import Link from 'next/link';
-import { getAllPostSlugs, getPostData, extractHeadings } from '@/lib/posts';
+import { getAllPostSlugs, getPostData, extractHeadings, countWords, calculateReadingTime } from '@/lib/posts';
+import { getTags } from '@/lib/tags';
 import fs from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
+import { TagCloud } from '../../TagCloud';
+import matter from 'gray-matter';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const fullPath = path.join(process.cwd(), 'posts', `${params.slug}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-  const matter = await import('gray-matter');
-  const { data } = matter.default(fileContents);
+  const { data } = matter(fileContents);
   
   return {
     title: data.title,
@@ -52,12 +54,19 @@ function TableOfContents({ headings }: { headings: { id: string; text: string; l
 }
 
 export default async function PostPage({ params }: { params: { slug: string } }) {
+  const fullPath = path.join(process.cwd(), 'posts', `${params.slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data: frontmatter, content: rawContent } = matter(fileContents);
+  
   const post = await getPostData(params.slug);
-  const headings = extractHeadings(post.content);
+  const headings = extractHeadings(rawContent);
+  const tags = getTags();
+  const wordCount = countWords(rawContent);
+  const readingTime = calculateReadingTime(wordCount);
 
   return (
-    <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex gap-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex flex-col lg:flex-row gap-8">
         <article className="flex-1">
           <header className="mb-8">
             <Link
@@ -80,15 +89,25 @@ export default async function PostPage({ params }: { params: { slug: string } })
               Back to home
             </Link>
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              {post.frontmatter.title}
+              {frontmatter.title}
             </h1>
             <div className="flex flex-wrap items-center gap-4 text-gray-500 text-sm">
-              <time dateTime={post.frontmatter.date}>
-                {formatDate(post.frontmatter.date)}
+              <time dateTime={frontmatter.date}>
+                {formatDate(frontmatter.date)}
               </time>
-              <div className="flex gap-2">
-                {post.frontmatter.tags.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
+              <span className="text-gray-400">·</span>
+              <span>{wordCount} 字</span>
+              <span className="text-gray-400">·</span>
+              <span>阅读时间：{readingTime} 分钟</span>
+              <div className="flex gap-2 ml-auto">
+                {(frontmatter.tags || []).map((tag: string) => (
+                  <Link
+                    key={tag}
+                    href={`/tags/${tag}`}
+                    className="tag hover:bg-blue-100 transition-colors"
+                  >
+                    {tag}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -100,7 +119,10 @@ export default async function PostPage({ params }: { params: { slug: string } })
         </article>
 
         <aside className="w-64 flex-shrink-0">
-          <TableOfContents headings={headings} />
+          <div className="sticky top-20 space-y-6">
+            <TableOfContents headings={headings} />
+            <TagCloud tags={tags} />
+          </div>
         </aside>
       </div>
     </main>

@@ -7,6 +7,11 @@ import { useSearch } from './SearchProvider';
 import { TagCloud } from './TagCloud';
 import type { Post } from '@/lib/types';
 
+interface PostWithStats extends Post {
+  wordCount: number;
+  readingTime: number;
+}
+
 const PAGE_SIZE = 5;
 
 function formatDate(dateString: string): string {
@@ -18,7 +23,7 @@ function formatDate(dateString: string): string {
   });
 }
 
-function PostCard({ post }: { post: Post }) {
+function PostCard({ post }: { post: PostWithStats }) {
   return (
     <article className="blog-card">
       <Link href={`/posts/${post.slug}`}>
@@ -29,8 +34,12 @@ function PostCard({ post }: { post: Post }) {
         <time dateTime={post.frontmatter.date}>
           {formatDate(post.frontmatter.date)}
         </time>
-        <div className="flex gap-2">
-          {post.frontmatter.tags.map((tag) => (
+        <span className="text-gray-400">·</span>
+        <span>{post.wordCount} 字</span>
+        <span className="text-gray-400">·</span>
+        <span>阅读时间：{post.readingTime} 分钟</span>
+        <div className="flex gap-2 ml-auto">
+          {(post.frontmatter.tags || []).map((tag) => (
             <Link
               key={tag}
               href={`/tags/${tag}`}
@@ -115,7 +124,7 @@ export default function HomeClient({
   allPosts,
   tags,
 }: {
-  allPosts: Post[];
+  allPosts: PostWithStats[];
   tags: string[];
 }) {
   const router = useRouter();
@@ -162,7 +171,7 @@ export default function HomeClient({
   };
 
   return (
-    <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Latest Posts</h1>
 
       <div className="flex flex-col lg:flex-row gap-8">

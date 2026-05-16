@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { getPostsByTag, getTags } from '@/lib/tags';
+import { countWords, calculateReadingTime } from '@/lib/posts';
 import type { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: { tag: string } }): Promise<Metadata> {
@@ -27,8 +28,14 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
   const posts = getPostsByTag(params.tag);
   const allTags = getTags();
 
+  const postsWithStats = posts.map(post => ({
+    ...post,
+    wordCount: countWords(post.content),
+    readingTime: calculateReadingTime(countWords(post.content)),
+  }));
+
   return (
-    <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="flex-1">
           <Link
@@ -58,7 +65,7 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
             <p className="text-gray-500 text-center py-12">暂无文章</p>
           ) : (
             <div className="space-y-6">
-              {posts.map((post) => (
+              {postsWithStats.map((post) => (
                 <article key={post.slug} className="blog-card">
                   <Link href={`/posts/${post.slug}`}>
                     <h2 className="blog-title">{post.frontmatter.title}</h2>
@@ -68,8 +75,12 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
                     <time dateTime={post.frontmatter.date}>
                       {formatDate(post.frontmatter.date)}
                     </time>
-                    <div className="flex gap-2">
-                      {post.frontmatter.tags.map((tag) => (
+                    <span className="text-gray-400">·</span>
+                    <span>{post.wordCount} 字</span>
+                    <span className="text-gray-400">·</span>
+                    <span>阅读时间：{post.readingTime} 分钟</span>
+                    <div className="flex gap-2 ml-auto">
+                      {(post.frontmatter.tags || []).map((tag) => (
                         <Link
                           key={tag}
                           href={`/tags/${tag}`}

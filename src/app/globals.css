@@ -23,7 +23,16 @@ body {
   }
 
   .blog-card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-300;
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6 transition-all duration-300 ease-out;
+  }
+
+  .blog-card:hover {
+    box-shadow: 
+      0 10px 40px rgba(0, 0, 0, 0.15),
+      0 -5px 20px rgba(0, 0, 0, 0.05),
+      5px 0 20px rgba(0, 0, 0, 0.05),
+      -5px 0 20px rgba(0, 0, 0, 0.05);
+    transform: translateY(-8px);
   }
 
   .blog-title {
