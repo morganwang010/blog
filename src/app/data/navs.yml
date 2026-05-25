@@ -51,3 +51,10 @@ websites:
     desc: 在线文档知识库
     category: office
     logo: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg
+    
+  - id: 6
+    name: 在线云操作系统
+    url: https://puter.com/
+    desc: 在线云操作系统
+    category: study
+    logo: https://puter.com/favicon.ico

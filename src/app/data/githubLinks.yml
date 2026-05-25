@@ -1,0 +1,29 @@
+- id: 1
+  repo: "username/myblog"
+  title: "My Personal Blog"
+  desc: "A Next.js blog with markdown support, featuring a clean design and fast performance."
+  stars: 128
+  forks: 32
+  language: "TypeScript"
+  url: "https://github.com/username/myblog"
+  updated: "2024-01-15"
+
+- id: 2
+  repo: "username/awesome-cli"
+  title: "Awesome CLI Tools"
+  desc: "A collection of useful command-line tools for developers."
+  stars: 256
+  forks: 45
+  language: "Go"
+  url: "https://github.com/username/awesome-cli"
+  updated: "2024-02-20"
+
+- id: 3
+  repo: "username/react-components"
+  title: "React Component Library"
+  desc: "A set of reusable React components for modern web applications."
+  stars: 89
+  forks: 12
+  language: "TypeScript"
+  url: "https://github.com/username/react-components"
+  updated: "2024-03-10"
