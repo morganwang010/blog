@@ -1,22 +1,19 @@
-# 导航网站分类导航配置
-categories:
-  - name: 全部
-    key: all
-  - name: 前端开发
-    key: frontend
-  - name: 后端服务
-    key: backend
-  - name: AI工具
-    key: ai
-  - name: 设计资源
-    key: design
-  - name: 效率办公
-    key: office
-  - name: 学习教程
-    key: study
-
 # 站点列表
 websites:
+  - id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    name: fal.ai
+    url: https://fal.ai/models/openai/gpt-image-2
+    desc: 提供AI图像生成相关模型服务的技术平台,chat-gpt-image-2
+    category: 开发平台
+    logo: https://fal.ai/favicon.ico
+
+  - id: "19a87c2d-4e61-4892-9017-8fb621bc7528"
+    name: OpenArt
+    url: https://openart.ai/suite/create-image/gpt-image-2
+    desc: AI智能图像生成创作平台,chat-gpt-image-2
+    category: ai
+    logo: https://openart.ai/favicon.ico
+
   - id: 1
     name: Next.js
     url: https://nextjs.org
@@ -58,3 +55,19 @@ websites:
     desc: 在线云操作系统
     category: study
     logo: https://puter.com/favicon.ico
+# 导航网站分类导航配置
+categories:
+  - name: 全部
+    key: all
+  - name: 前端开发
+    key: frontend
+  - name: 后端服务
+    key: backend
+  - name: AI工具
+    key: ai
+  - name: 设计资源
+    key: design
+  - name: 效率办公
+    key: office
+  - name: 学习教程
+    key: study

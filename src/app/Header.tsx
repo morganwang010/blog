@@ -73,6 +73,14 @@ export function Header() {
               首页
             </Link>
             <Link
+              href="/sitemap"
+              className={`text-sm font-medium transition-colors ${
+                pathname === '/sitemap' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'
+              }`}
+            >
+              导航
+            </Link>
+            <Link
               href="/github"
               className={`text-sm font-medium transition-colors ${
                 pathname === '/github' ? 'text-blue-600' : 'text-gray-600 hover:text-blue-600'

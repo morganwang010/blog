@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "setup": "node setup-sitemap.js",
+    "predev": "node setup-sitemap.js",
     "dev": "next dev",
+    "prebuild": "node setup-sitemap.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -37,3 +40,4 @@
     "typescript": "^5"
   }
 }
+

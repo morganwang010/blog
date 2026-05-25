@@ -65,7 +65,8 @@ export default function WebsiteClient({ initialData }: Props) {
   const filterList:NavSiteItem[] = initialData.websites.filter(item=>{
     const catMatch = activeCat === 'all' || item.category === activeCat;
     const searchMatch = item.name.toLowerCase().includes(searchKey.toLowerCase()) 
-      || item.desc.toLowerCase().includes(searchKey.toLowerCase());
+      || item.url.toLowerCase().includes(searchKey.toLowerCase())
+      || item.desc.toLowerCase().includes(searchKey.toLowerCase()); 
     return catMatch && searchMatch;
   })
 
