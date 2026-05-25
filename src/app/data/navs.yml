@@ -1,0 +1,53 @@
+# 导航网站分类导航配置
+categories:
+  - name: 全部
+    key: all
+  - name: 前端开发
+    key: frontend
+  - name: 后端服务
+    key: backend
+  - name: AI工具
+    key: ai
+  - name: 设计资源
+    key: design
+  - name: 效率办公
+    key: office
+  - name: 学习教程
+    key: study
+
+# 站点列表
+websites:
+  - id: 1
+    name: Next.js
+    url: https://nextjs.org
+    desc: React全栈服务端渲染框架
+    category: frontend
+    logo: https://nextjs.org/favicon.ico
+
+  - id: 2
+    name: TailwindCSS
+    url: https://tailwindcss.com
+    desc: 原子化CSS极速样式框架
+    category: frontend
+    logo: https://tailwindcss.com/favicons/favicon.ico
+
+  - id: 3
+    name: Ollama
+    url: https://ollama.com
+    desc: 本地大模型部署工具
+    category: ai
+    logo: https://ollama.com/public/ollama.png
+
+  - id: 4
+    name: GitHub
+    url: https://github.com
+    desc: 全球最大代码托管平台
+    category: backend
+    logo: https://github.com/favicon.ico
+
+  - id: 5
+    name: 语雀
+    url: https://www.yuque.com
+    desc: 在线文档知识库
+    category: office
+    logo: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg

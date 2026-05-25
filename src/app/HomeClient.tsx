@@ -128,6 +128,7 @@ export default function HomeClient({
   tags: string[];
 }) {
   const router = useRouter();
+  // const { categories, websites } = getNavYamlData();
   const { debouncedQuery } = useSearch();
 
   const [currentPage, setCurrentPage] = useState(1);

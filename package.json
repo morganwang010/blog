@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
     "js-yaml": "^4.1.1",
