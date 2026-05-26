@@ -67,7 +67,7 @@ export default async function PostPage({ params }: { params: { slug: string } })
   return (
     <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="flex flex-col lg:flex-row gap-8">
-        <article className="flex-1">
+        <article className="flex-1 min-w-0">
           <header className="mb-8">
             <Link
               href="/"
@@ -113,8 +113,8 @@ export default async function PostPage({ params }: { params: { slug: string } })
             </div>
           </header>
 
-          <div className="bg-white rounded-lg border border-gray-200 p-6 sm:p-8 prose">
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          <div className="bg-white rounded-lg border border-gray-200 p-6 sm:p-8 prose max-w-full overflow-hidden">
+            <div className="max-w-full overflow-x-auto break-words whitespace-pre-wrap" dangerouslySetInnerHTML={{ __html: post.content }} />
           </div>
         </article>
 

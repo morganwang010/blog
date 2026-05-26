@@ -1,12 +1,12 @@
 
 - id: 1
-  repo: "username/myblog"
+  repo: "morganwang010/myblog"
   title: "My Personal Blog"
   desc: "A Next.js blog with markdown support, featuring a clean design and fast performance."
   stars: 128
   forks: 32
   language: "TypeScript"
-  url: "https://github.com/username/myblog"
+  url: "https://github.com/morganwang010/myblog"
   updated: "2024-01-15"
 
 - id: 2
