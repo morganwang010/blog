@@ -1,11 +1,84 @@
 # 站点列表
 websites:
+  - id: 79a82f1d-1b36-48c9-9012-87e9d1f34567
+    name: aihot
+    url: https://aihot.virxact.com/
+    desc: 面向用户提供AI相关服务与工具的线上站点
+    category: 工具
+    logo: https://aihot.virxact.com/favicon.ico
+    update: 2026-05-26
+
+  - id: 550e8400-e29b-41d4-a716-446655440000
+    name: OfficeCLI
+    url: https://officecli.io/
+    desc: 面向办公场景的命令行工具站点，提供相关命令行应用及配套服务。
+    category: 工具
+    logo: https://officecli.io/favicon.ico
+    update: 2026-05-26
+
+  - id: 96e7c258-1a3b-4d2e-8f71-02d591ac3729
+    name: JustPlay
+    url: https://www.justplay.com.tw/
+    desc: 综合娱乐相关站点，提供各类娱乐相关服务与内容。
+    category: 门户
+    logo: https://www.justplay.com.tw/favicon.ico
+    update: 2026-05-26
+
+  - id: 81b72698-1c92-4870-9052-7e3691f52098
+    name: Bria
+    url: https://platform.bria.ai/image-editing/remove-background/sandbox
+    desc: 在线AI图像编辑平台，主打图片抠图、去除背景等图像处理功能。
+    category: 工具
+    logo: https://platform.bria.ai/favicon.ico
+    update: 2026-05-26
+
+  - id: 297f861a-8d21-4735-b926-18e91267c312
+    name: Bolt
+    url: https://bolt.new/
+    desc: 在线AI代码开发平台，支持浏览器内编写、运行与部署代码。
+    category: 开发平台
+    logo: https://bolt.new/favicon.ico
+    update: 2026-05-26
+
+  - id: 78a92f1c-3d5e-4b89-a127-89c67210d341
+    name: ImageV2
+    url: https://imagev2.ai/zh/ai-image-generator
+    desc: 主打AI图像生成服务，提供在线智能绘图相关功能。
+    category: 工具
+    logo: https://imagev2.ai/favicon.ico
+    update: 2026-05-26
+
+  - id: 61e4ed92-0aa5-4e6f-8689-5d6569323706
+    name: AionUi
+    url: https://www.aionui.com/
+    desc: 开源免费的本地桌面多AI代理协作平台，集成二十余种专项AI助手，支持多模型并行协作、任务定时自动化、远程操控，可一站式完成办公、设计、编程、学术等各类工作任务
+    category: 工具
+    logo: https://www.aionui.com/favicon.ico
+    updated: "2026-05-25"
+
+  - id: 5f8a2d7c-91e6-4830-b729-1c6370fa4218
+    name: CosyVoice
+    url: https://cosyvoice.org/
+    desc: 专注语音合成相关技术研发与应用展示的技术站点
+    category: 开发平台
+    logo: https://cosyvoice.org/favicon.ico
+    updated: "2026-05-25"
+
+  - id: "550e8400-e29b-41d4-a716-446655440000"
+    name: "Flipbook"
+    url: "https://flipbook.page/"
+    desc: "实时按需生成的无限视觉浏览器，以图像形式呈现网页内容，支持深度探索及实验性视频流功能"
+    category: "工具"
+    logo: https://flipbook.page/favicon.ico
+    updated: "2026-05-25"
+
   - id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
     name: fal.ai
     url: https://fal.ai/models/openai/gpt-image-2
     desc: 提供AI图像生成相关模型服务的技术平台,chat-gpt-image-2
     category: 开发平台
     logo: https://fal.ai/favicon.ico
+    updated: "2026-05-25"
 
   - id: "19a87c2d-4e61-4892-9017-8fb621bc7528"
     name: OpenArt
@@ -13,6 +86,7 @@ websites:
     desc: AI智能图像生成创作平台,chat-gpt-image-2
     category: ai
     logo: https://openart.ai/favicon.ico
+    updated: "2026-05-25"
 
   - id: 1
     name: Next.js
@@ -20,6 +94,7 @@ websites:
     desc: React全栈服务端渲染框架
     category: frontend
     logo: https://nextjs.org/favicon.ico
+    updated: "2026-05-25"
 
   - id: 2
     name: TailwindCSS
@@ -27,6 +102,7 @@ websites:
     desc: 原子化CSS极速样式框架
     category: frontend
     logo: https://tailwindcss.com/favicons/favicon.ico
+    updated: "2026-05-25" 
 
   - id: 3
     name: Ollama
@@ -34,6 +110,7 @@ websites:
     desc: 本地大模型部署工具
     category: ai
     logo: https://ollama.com/public/ollama.png
+    updated: "2026-05-25"
 
   - id: 4
     name: GitHub
@@ -41,6 +118,7 @@ websites:
     desc: 全球最大代码托管平台
     category: backend
     logo: https://github.com/favicon.ico
+    updated: "2026-05-25"
 
   - id: 5
     name: 语雀
@@ -48,13 +126,14 @@ websites:
     desc: 在线文档知识库
     category: office
     logo: https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg
-    
+    updated: "2026-05-25" 
   - id: 6
     name: 在线云操作系统
     url: https://puter.com/
     desc: 在线云操作系统
     category: study
     logo: https://puter.com/favicon.ico
+    updated: "2026-05-25"
 # 导航网站分类导航配置
 categories:
   - name: 全部
