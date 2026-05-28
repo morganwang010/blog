@@ -1,5 +1,13 @@
 # 站点列表
 websites:
+  - id: 550e8400-e29b-41d4-a716-446655440000
+    name: 咪咕音乐
+    url: https://flac.music.hi.cn/
+    desc: 提供无损FLAC格式音乐试听、下载等音乐相关服务
+    category: 音乐平台
+    logo: https://music.hi.cn/images/logo.png
+    update: 2026-05-28
+
   - id: 79a82f1d-1b36-48c9-9012-87e9d1f34567
     name: aihot
     url: https://aihot.virxact.com/
